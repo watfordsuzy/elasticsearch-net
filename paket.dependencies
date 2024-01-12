@@ -5,15 +5,13 @@ group build
     source https://www.nuget.org/api/v2
 
     nuget FAKE prerelease
-    nuget FSharp.Data 
+    nuget FSharp.Data 3.3.3
     nuget Newtonsoft.Json
 
 	nuget Octokit
 	
     nuget ILRepack 2.0.16
 	
-    source https://ci.appveyor.com/nuget/assemblyrewriter
     clitool assembly-rewriter
     
-    source https://ci.appveyor.com/nuget/assemblydiffer
     clitool assembly-differ
