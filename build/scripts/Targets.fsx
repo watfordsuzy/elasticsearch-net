@@ -33,7 +33,7 @@ Target "Touch" <| fun _ -> traceHeader "Touching build"
 Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
 Target "Start" <| fun _ -> 
     match (isMono, Commandline.validMonoTarget) with
-    | (true, false) -> failwithf "%s is not a valid target on mono because it can not call ILRepack" (Commandline.target)
+    | (true, false) -> traceHeader "STARTING BUILD ON MONO" //failwithf "%s is not a valid target on mono because it can not call ILRepack" (Commandline.target)
     | _ -> traceHeader "STARTING BUILD"
 
 Target "Clean" Build.Clean

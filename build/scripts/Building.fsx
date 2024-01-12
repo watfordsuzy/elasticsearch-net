@@ -117,8 +117,9 @@ module Build =
                 if p.MergeDependencies <> [] then Rewrite None f p.MergeDependencies
     
     let ILRepack() = 
+        ilRepackInternal()
         //ilrepack on mono crashes pretty hard on my machine
-        match isMono with
-        | true -> ignore()
-        | false -> ilRepackInternal()
+        //match isMono with
+        //| true -> ignore()
+        //| false -> ilRepackInternal()
          

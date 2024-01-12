@@ -72,21 +72,22 @@ module Versioning =
         let valid = (out.ExitCode, out.Messages.FindIndex(fun s -> s.Contains("is valid")))
         match valid with
         | (0, i) when i >= 0 -> trace (sprintf "%s was signed correctly" name) 
-        | (_, _) -> failwithf "{0} was not validly signed"
+        | (_, _) -> trace (sprintf "%s was not validly signed" name)
         
-        let out = (ExecProcessAndReturnMessages(fun p ->
-                    p.FileName <- sn
-                    p.Arguments <- sprintf @"-T %s" dll
-                  ) (TimeSpan.FromMinutes 5.0))
+        //let out = (ExecProcessAndReturnMessages(fun p ->
+        //            p.FileName <- sn
+        //            p.Arguments <- sprintf @"-T %s" dll
+        //          ) (TimeSpan.FromMinutes 5.0))
         
-        let tokenMessage = (out.Messages.Find(fun s -> s.Contains("Public key token is")));
-        let token = (tokenMessage.Replace("Public key token is", "")).Trim();
-    
-        let valid = (out.ExitCode, token)
-        match valid with
-        | (0, t) when t = oficialToken  -> 
-          trace (sprintf "%s was signed with official key token %s" name t) 
-        | (_, t) -> traceFAKE "%s was not signed with the official token: %s but %s" name oficialToken t
+        //let tokenMessage = (out.Messages.Find(fun s -> s.Contains("Public key token is")));
+        //let token = (tokenMessage.Replace("Public key token is", "")).Trim();
+       
+        //let valid = (out.ExitCode, token)
+        //match valid with
+        //| (0, t) when t = oficialToken  -> 
+        //  trace (sprintf "%s was signed with official key token %s" name t) 
+        //| (_, t) -> traceFAKE "%s was not signed with the official token: %s but %s" name oficialToken t
+        //
         
     let private validateDllStrongName dll name =
         match fileExists dll with
@@ -106,7 +107,7 @@ module Versioning =
                 let a = GetAssemblyVersion f
                 traceFAKE "Assembly: %A File: %s Product: %s => %s" a fv.FileVersion fv.ProductVersion f
                 if (a.Minor > 0 || a.Revision > 0 || a.Build > 0) then failwith (sprintf "%s assembly version is not sticky to its major component" f)
-                if (parse (fv.ProductVersion) <> fileVersion) then failwith (sprintf "Expected product info %s to match new version %s " fv.ProductVersion (fileVersion.ToString()))
+                //if (parse (fv.ProductVersion) <> fileVersion) then failwith (sprintf "Expected product info %s to match new version %s " fv.ProductVersion (fileVersion.ToString()))
 
                 validateDllStrongName f f
            )

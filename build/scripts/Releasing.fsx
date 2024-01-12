@@ -1,4 +1,4 @@
-﻿#I @"../../packages/build/Octokit/lib/net45"
+﻿#I @"../../packages/build/Octokit/lib/netstandard2.0"
 #r @"FakeLib.dll"
 #r "Octokit.dll"
 #nowarn "0044" //TODO sort out FAKE 5
